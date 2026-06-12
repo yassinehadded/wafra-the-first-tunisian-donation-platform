@@ -1,94 +1,67 @@
-# =========================
-# Environment / Secrets
-# =========================
+# =====================
+# Environment secrets
+# =====================
 .env
-.env.*
-!.env.example
-
-# OAuth / credentials
-config/oauth-config.php
-config/config.php
-config/env_loader.php
-
-# API keys
-*.key
-*.pem
-*.secret
+.env.local
+.env.production
+.env.development
 
 
-# =========================
-# Logs / Debug
-# =========================
+# =====================
+# Logs
+# =====================
 *.log
 debug.log
 error.log
 
 
-# =========================
-# Composer
-# =========================
-vendor/
-composer.lock
-
-
-# =========================
-# Uploads (user generated files)
-# =========================
+# =====================
+# Uploads (user data)
+# =====================
 uploads/*
 !uploads/.htaccess
 
 
-# =========================
-# Cache / Temporary
-# =========================
+# =====================
+# Composer dependencies
+# =====================
+vendor/
+
+
+# =====================
+# Cache / temporary
+# =====================
 cache/
 tmp/
 temp/
 *.tmp
 
 
-# =========================
-# OS files
-# =========================
-.DS_Store
-Thumbs.db
-desktop.ini
-
-
-# =========================
+# =====================
 # IDE
-# =========================
+# =====================
 .vscode/
 .idea/
 *.suo
 *.user
 
 
-# =========================
-# Node (if used later)
-# =========================
-node_modules/
-npm-debug.log*
-package-lock.json
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+desktop.ini
 
 
-# =========================
-# Database dumps
-# =========================
+# =====================
+# Database backups
+# =====================
 *.sql.bak
 *.dump
 
 
-# =========================
-# PHP
-# =========================
+# =====================
+# PHP test cache
+# =====================
 .phpunit.result.cache
-
-
-# =========================
-# Generated files
-# =========================
-*.zip
-*.rar
-*.tar
-*.gz
