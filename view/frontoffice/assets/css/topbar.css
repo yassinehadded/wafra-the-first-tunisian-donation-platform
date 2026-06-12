@@ -1,0 +1,127 @@
+/* Top Bar Styles - High specificity to override template CSS */
+
+body {
+    padding-left: 250px;
+    padding-top: 60px;
+}
+
+.top-bar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 250px !important;
+    right: 0 !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%) !important;
+    border-bottom: 2px solid #f5a425 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 30px !important;
+    z-index: 999 !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+.top-bar-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+}
+
+.top-bar-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+.top-bar .user-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    color: #fff !important;
+}
+
+.top-bar .user-name {
+    font-weight: 600 !important;
+    color: #ffd700 !important;
+}
+
+.top-bar .profile-link,
+.top-bar .logout-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+
+.top-bar .profile-link {
+    background: linear-gradient(135deg, #f5a425 0%, #e5941f 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(245, 164, 37, 0.3) !important;
+    border: none !important;
+}
+
+.top-bar .profile-link:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(245, 164, 37, 0.5) !important;
+    background: linear-gradient(135deg, #e5941f 0%, #d4840f 100%) !important;
+    color: #fff !important;
+}
+
+.top-bar .logout-link {
+    background: transparent !important;
+    color: #fff !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+}
+
+.top-bar .logout-link:hover {
+    background: rgba(255,255,255,0.1) !important;
+    border-color: rgba(255,255,255,0.5) !important;
+    color: #fff !important;
+}
+
+.top-bar .profile-link i,
+.top-bar .logout-link i {
+    font-size: 16px !important;
+    display: inline-block !important;
+}
+
+.top-bar .profile-link span,
+.top-bar .logout-link span {
+    display: inline-block !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-left: 0 !important;
+        padding-top: 60px !important;
+    }
+    
+    .top-bar {
+        left: 0 !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

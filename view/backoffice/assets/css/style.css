@@ -1,0 +1,257 @@
+/* Custom styles for Back Office Dashboard */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+#sidebar {
+    width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebar.collapsed {
+    width: 70px;
+}
+
+#sidebar .sidebar-header h5 {
+    font-weight: bold;
+    color: #495057;
+}
+
+#sidebar .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 12px 20px;
+    transition: all 0.2s;
+}
+
+#sidebar .list-group-item:hover {
+    background-color: #e9ecef;
+    color: #0d6efd;
+}
+
+#sidebar .list-group-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+#sidebar.collapsed .list-group-item span {
+    display: none;
+}
+
+#sidebar.collapsed .sidebar-header h5 {
+    display: none;
+}
+
+#page-content-wrapper {
+    min-height: 100vh;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.btn {
+    border-radius: 6px;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+body.dark-mode #sidebar {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark-mode #sidebar .sidebar-header h5 {
+    color: #f8f9fa;
+}
+
+body.dark-mode #sidebar .list-group-item {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-color: #495057;
+}
+
+body.dark-mode #sidebar .list-group-item:hover {
+    background-color: #495057;
+}
+
+body.dark-mode #sidebar .list-group-item.active {
+    background-color: #0d6efd;
+}
+
+body.dark-mode .navbar {
+    background-color: #343a40 !important;
+    color: #f8f9fa;
+}
+
+body.dark-mode .card {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark-mode .table {
+    color: #f8f9fa;
+}
+
+body.dark-mode .table thead th {
+    background-color: #495057;
+    color: #f8f9fa;
+}
+
+body.dark-mode footer {
+    background-color: #343a40;
+    color: #adb5bd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    #sidebar.show {
+        left: 0;
+    }
+
+    #page-content-wrapper {
+        margin-left: 0;
+    }
+
+    .navbar .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .navbar form {
+        order: 3;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Animation for content switching */
+.content-section {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom button styles */
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Badge styles */
+.badge {
+    font-size: 0.75em;
+}
+
+/* Form control focus */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert styles */
+.alert {
+    border-radius: 10px;
+}
+
+/* Progress bar styles */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Custom icons */
+.bi {
+    font-size: 1.1em;
+}
+
+/* Loading spinner */
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+}

@@ -1,0 +1,460 @@
+/**
+ * Enhanced Top Bar - Modern, Smooth, Responsive
+ * UX Decisions:
+ * - Smooth transitions for better perceived performance
+ * - Active link indicator for clear navigation feedback
+ * - Sticky behavior with shadow animation for depth perception
+ * - Mobile-first approach with animated hamburger menu
+ * - Accessibility: keyboard navigation and reduced motion support
+ */
+
+/* ============================================
+   BASE STYLES & VARIABLES
+   ============================================ */
+:root {
+    --topbar-height: 60px;
+    --topbar-bg-start: #1a1a1a;
+    --topbar-bg-end: #2a2a2a;
+    --topbar-accent: #f5a425;
+    --topbar-accent-hover: #ffd700;
+    --topbar-text: #ffffff;
+    --topbar-shadow: rgba(0, 0, 0, 0.1);
+    --topbar-shadow-scrolled: rgba(0, 0, 0, 0.2);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   BODY PADDING (for sticky navbar)
+   ============================================ */
+body {
+    padding-top: var(--topbar-height);
+    padding-left: 250px;
+    scroll-behavior: smooth;
+}
+
+/* Full-width body when no sidebar (profile.php, posts.php) */
+body.no-sidebar {
+    padding-left: 0;
+}
+
+/* ============================================
+   TOP BAR CONTAINER
+   ============================================ */
+.top-bar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 250px !important;
+    right: 0 !important;
+    height: var(--topbar-height) !important;
+    background: linear-gradient(135deg, var(--topbar-bg-start) 0%, var(--topbar-bg-end) 100%) !important;
+    border-bottom: 2px solid var(--topbar-accent) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 30px !important;
+    z-index: 999 !important;
+    box-shadow: 0 2px 10px var(--topbar-shadow) !important;
+    transition: box-shadow var(--transition-base), transform var(--transition-base) !important;
+    will-change: box-shadow, transform;
+}
+
+/* Full-width when no sidebar */
+body.no-sidebar .top-bar {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+}
+
+/* Shadow animation on scroll */
+.top-bar.scrolled {
+    box-shadow: 0 4px 20px var(--topbar-shadow-scrolled) !important;
+}
+
+/* Hide navbar on scroll down (optional - can be enabled via JS) */
+.top-bar.hidden {
+    transform: translateY(-100%);
+}
+
+/* ============================================
+   TOP BAR LEFT (Logo)
+   ============================================ */
+.top-bar-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+}
+
+.top-bar-left h4 {
+    margin: 0 !important;
+    color: var(--topbar-accent-hover) !important;
+    font-weight: 700 !important;
+    transition: transform var(--transition-fast), color var(--transition-fast) !important;
+}
+
+.top-bar-left a {
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.top-bar-left a:hover h4 {
+    transform: scale(1.05);
+    color: var(--topbar-accent) !important;
+}
+
+/* ============================================
+   TOP BAR RIGHT (Navigation Links)
+   ============================================ */
+.top-bar-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+/* ============================================
+   USER INFO
+   ============================================ */
+.top-bar .user-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    color: var(--topbar-text) !important;
+    padding: 8px 12px;
+    border-radius: 20px;
+    transition: background-color var(--transition-fast);
+}
+
+.top-bar .user-info:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.top-bar .user-name {
+    font-weight: 600 !important;
+    color: var(--topbar-accent-hover) !important;
+}
+
+/* ============================================
+   NAVIGATION LINKS (Home, Posts, Profile)
+   ============================================ */
+.top-bar .profile-link,
+.top-bar .logout-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all var(--transition-base) !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base link styles */
+.top-bar .profile-link {
+    background: linear-gradient(135deg, var(--topbar-accent) 0%, #e5941f 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(245, 164, 37, 0.3) !important;
+    border: none !important;
+}
+
+/* Hover effect with smooth transform */
+.top-bar .profile-link:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(245, 164, 37, 0.5) !important;
+    background: linear-gradient(135deg, #e5941f 0%, #d4840f 100%) !important;
+    color: #fff !important;
+}
+
+/* Active state - animated underline */
+.top-bar .profile-link.active {
+    background: linear-gradient(135deg, var(--topbar-accent-hover) 0%, var(--topbar-accent) 100%) !important;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
+}
+
+.top-bar .profile-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--topbar-accent-hover);
+    border-radius: 2px;
+    animation: slideIn var(--transition-base);
+}
+
+@keyframes slideIn {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Focus state for accessibility */
+.top-bar .profile-link:focus,
+.top-bar .logout-link:focus {
+    outline: 2px solid var(--topbar-accent);
+    outline-offset: 2px;
+}
+
+/* Logout link styles */
+.top-bar .logout-link {
+    background: transparent !important;
+    color: var(--topbar-text) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.top-bar .logout-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--topbar-text) !important;
+    transform: translateY(-1px);
+}
+
+/* Icon animations */
+.top-bar .profile-link i,
+.top-bar .logout-link i {
+    font-size: 16px !important;
+    display: inline-block !important;
+    transition: transform var(--transition-fast);
+}
+
+.top-bar .profile-link:hover i,
+.top-bar .logout-link:hover i {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   NOTIFICATION BELL
+   ============================================ */
+.notification-container {
+    position: relative;
+    margin-right: 10px;
+}
+
+.notification-bell {
+    background: transparent !important;
+    border: none !important;
+    color: var(--topbar-text) !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+    padding: 8px 12px !important;
+    position: relative !important;
+    border-radius: 50%;
+    transition: all var(--transition-base);
+    outline: none;
+}
+
+.notification-bell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.notification-bell:focus {
+    outline: 2px solid var(--topbar-accent);
+    outline-offset: 2px;
+}
+
+.notification-bell:active {
+    transform: scale(0.95);
+}
+
+/* Badge animation */
+.notification-badge {
+    position: absolute !important;
+    top: 5px !important;
+    right: 5px !important;
+    background: #e74c3c !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 11px !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    animation: pulse 2s infinite;
+}
+
+.notification-badge.show {
+    display: flex !important;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Notification dropdown */
+.notification-dropdown {
+    position: absolute !important;
+    top: calc(100% + 10px) !important;
+    right: 0 !important;
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    width: 350px !important;
+    max-height: 500px !important;
+    overflow-y: auto !important;
+    z-index: 1000 !important;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    pointer-events: none;
+}
+
+.notification-dropdown.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    body {
+        padding-left: 0 !important;
+        padding-top: var(--topbar-height) !important;
+    }
+    
+    .top-bar {
+        left: 0 !important;
+        padding: 0 15px !important;
+    }
+    
+    .top-bar-left h4 {
+        font-size: 18px !important;
+    }
+    
+    .top-bar .profile-link span,
+    .top-bar .logout-link span,
+    .top-bar .user-name {
+        display: none;
+    }
+    
+    .top-bar .profile-link,
+    .top-bar .logout-link {
+        padding: 10px 15px !important;
+        min-width: 44px; /* Touch target size */
+    }
+    
+    .notification-dropdown {
+        width: calc(100vw - 30px) !important;
+        right: 15px !important;
+    }
+}
+
+/* ============================================
+   HAMBURGER MENU (if needed for mobile)
+   ============================================ */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    outline: none;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background: var(--topbar-text);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+.mobile-menu-overlay {
+    position: fixed;
+    top: var(--topbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.mobile-menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    position: fixed;
+    top: var(--topbar-height);
+    right: 0;
+    width: 280px;
+    height: calc(100vh - var(--topbar-height));
+    background: var(--topbar-bg-start);
+    padding: 20px;
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    overflow-y: auto;
+}
+
+.mobile-menu-overlay.show .mobile-menu-content {
+    transform: translateX(0);
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
+
+
+
+

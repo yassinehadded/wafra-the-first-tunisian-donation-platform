@@ -1,0 +1,30 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Set base directory (auto-detected)
+# RewriteBase /wafra-integration/
+
+# Prevent directory listing
+Options -Indexes
+
+# Allow direct access to existing files and directories (CSS, JS, images, fonts, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route all other requests to index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security: Block access to sensitive files
+<FilesMatch "^(\.env|\.git|composer\.(json|lock)|README\.md|\.htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP Settings
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+
